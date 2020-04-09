@@ -56,7 +56,6 @@ namespace snake{
     }
     
     void Snake::extend(){
-        if(snake_body.empty()){return;}
         snake_piece& tail_end = snake_body[snake_body.size()-1];
         snake_piece& tail_penultimate = snake_body[snake_body.size()-2];
         
@@ -79,7 +78,7 @@ namespace snake{
     }
     
     void Snake::move(){
-        for(int i = 1; i < snake_body.size(); ++i){
+        for(int i = snake_body.size()-1; i >= 1 ; --i){
             snake_body[i].position = snake_body[i-1].position;
         }
         switch(direction){ //for changing the position of head
