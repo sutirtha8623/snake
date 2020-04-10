@@ -46,8 +46,8 @@ namespace snake{
     }
     
     void Env::regenerate_food(){
-        int max_x = (window_size.x/blocksize) - 2;
-        int max_y = (window_size.y/blocksize) - 2;
+        int max_x = (window_size.x/blocksize) - 4;
+        int max_y = (window_size.y/blocksize) - 4;
         
         food_position = sf::Vector2i(random_generator(1, max_x), random_generator(1, max_y));
         
