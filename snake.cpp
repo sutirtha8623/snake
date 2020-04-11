@@ -1,4 +1,3 @@
-#include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
 #include"snake.hpp"
 
@@ -16,7 +15,7 @@ namespace snake{
         return direction;
     }
     
-    float Snake::get_velocity(){
+    int Snake::get_velocity(){
         return velocity;
     }
     
@@ -39,6 +38,11 @@ namespace snake{
     void Snake::set_direction(Direction dir)
     {
         direction = dir;
+    }
+    
+    void Snake::set_velocity(int vel)
+    {
+        velocity = vel;
     }
 
     

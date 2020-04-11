@@ -12,7 +12,7 @@ TARGET = snake
 
 default: $(TARGET)
 
-%.o: %.cpp
+%.o: %.cpp %.hpp
 	$(CXX) $(COMPILER-FLAGS) $(SRCS)
 
 $(TARGET): $(OBJS)

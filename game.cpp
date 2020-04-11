@@ -1,4 +1,4 @@
-
+#include<SFML/Graphics.hpp>
 #include"game.hpp"
 
 
@@ -7,29 +7,23 @@ Game::Game()
 , env(sf::Vector2u(800, 600))
 , player(env.get_blocksize())
 {
-    clock.restart();
-    time_elapsed = 0.0f;
     window.setVerticalSyncEnabled(true);
 }
 
-sf::Time Game::get_elapsed_time()
-{
-    return clock.getElapsedTime();
-}
-
-void Game::restart_clock()
-{
-    clock.restart();
-}
-
-
-
 void Game::run()
 {
+    sf::Clock clock;
+    sf::Time timestep = sf::seconds(1.0f/player.get_velocity());
+    sf::Time time_elapsed = sf::Time::Zero;
     while(window.isOpen())
     {
-        handle_player_input();
-        update();
+        process_events();
+        time_elapsed += clock.restart();
+        while(time_elapsed > timestep){
+            time_elapsed -= timestep;
+            process_events();
+            update();
+        }
         render();
     }
 }
@@ -75,14 +69,8 @@ void Game::process_events()
 
 void Game::update()
 {
-    process_events();
-    float timestep = 200 - 10*player.get_velocity();
-    if(get_elapsed_time().asMilliseconds() >= timestep)
-    {
-        player.update();
-        env.update(player);
-        restart_clock();
-    }
+    player.update();
+    env.update(player);
     if(player.lost_state == true)
     {
         player.init();

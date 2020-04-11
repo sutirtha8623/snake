@@ -1,5 +1,3 @@
-#include<SFML/Window.hpp>
-#include<SFML/Graphics.hpp>
 #include"env_food.hpp"
 #include<random>
 

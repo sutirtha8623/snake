@@ -19,7 +19,7 @@ namespace snake{
     class Snake{
         std::vector<snake_piece> snake_body;
         int score; //snake is the player here
-        float velocity;
+        int velocity;
         Direction direction;
         int block_size;  //unit grid square size;
         sf::RectangleShape body_rectangle;
@@ -33,12 +33,13 @@ namespace snake{
     
         //getters
         Direction get_direction();
-        float get_velocity();
+        int get_velocity();
         int get_score();
         sf::Vector2i get_position(); //getter for snake head(snake head is the first piece of snake_body)
     
         //setters
         void set_direction(Direction dir);
+        void set_velocity(int);
     
         //modifiers
         void increase_score();
