@@ -9,3 +9,4 @@ snake game made to start learning sfml
 
 ### screenshot:
 ![](ss/init_pos.png)
+![](ss/game_over.png)
