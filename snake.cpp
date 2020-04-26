@@ -44,7 +44,11 @@ namespace snake{
     {
         velocity = vel;
     }
-
+    
+    void Snake::change_lost()
+    {
+        lost_state = !lost_state;
+    }
     
     void Snake::init(){
         snake_body.clear();
@@ -143,6 +147,11 @@ namespace snake{
             body_rectangle.setPosition(i->position.x * block_size, i->position.y * block_size);
             window.draw(body_rectangle);
         }
+    }
+
+    void Snake::clear_window(sf::RenderWindow& window)
+    {
+        window.clear(sf::Color::Black);
     }
 
     

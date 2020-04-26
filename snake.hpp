@@ -46,9 +46,11 @@ namespace snake{
         void extend();
         void init();
         void move();
+        void change_lost();
     
         void update();
         void render(sf::RenderWindow& window);
+        void clear_window(sf::RenderWindow& window);
     
     
     };

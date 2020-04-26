@@ -1,11 +1,13 @@
 #include<SFML/Graphics.hpp>
 #include"game.hpp"
+#include<iostream>
 
 
 Game::Game()
 : window(sf::VideoMode(800, 600), "Snake", sf::Style::Default)
 , env(sf::Vector2u(800, 600))
 , player(env.get_blocksize())
+, over(0, sf::Vector2u(600, 400))
 {
     window.setVerticalSyncEnabled(true);
 }
@@ -26,13 +28,14 @@ void Game::run()
         }
         render();
     }
-}
 
+
+}
 
 void Game::handle_player_input()
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && player.get_direction()!=snake::Direction::Down){
-        
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && player.get_direction()!=snake::Direction::Down)
+    {
         player.set_direction(snake::Direction::Up);
     }
     
@@ -49,6 +52,13 @@ void Game::handle_player_input()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && player.get_direction()!=snake::Direction::Left){
         
         player.set_direction(snake::Direction::Right);
+    }
+    
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && player.lost_state == true)
+    {
+        player.change_lost();
+        player.init();
+        run();
     }
 }
 
@@ -71,10 +81,6 @@ void Game::update()
 {
     player.update();
     env.update(player);
-    if(player.lost_state == true)
-    {
-        player.init();
-    }
 }
 
 void Game::render()
@@ -82,6 +88,13 @@ void Game::render()
     window.clear(sf::Color::Black);
     env.render(window);
     player.render(window);
+    if(player.lost_state == true)
+    {
+        window.clear(sf::Color::Black);
+        over.set_score(player.get_score());
+        std::cout<<player.get_score()<<"\n";
+        over.render(window);
+    }
     window.display();
 }
 

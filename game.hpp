@@ -4,6 +4,7 @@
 
 #include"snake.hpp"
 #include"env_food.hpp"
+#include"over.hpp"
 #include<SFML/Config.hpp>
 #include<SFML/Window.hpp>
 
@@ -16,8 +17,6 @@ public:
     void update();
     void render();
     
-    sf::Time get_elapsed_time();
-    void restart_clock();
     void handle_player_input();
     
 private:
@@ -27,5 +26,6 @@ private:
     
     snake::Env env;
     snake::Snake player;
+    snake::Over over;
 };
 #endif

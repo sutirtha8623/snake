@@ -26,6 +26,7 @@ namespace snake{
         
         void update(Snake& snake);
         void render(sf::RenderWindow& window);
+        void clear_window(sf::RenderWindow& window);
         
     };
     

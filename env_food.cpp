@@ -80,6 +80,11 @@ namespace snake{
         }
         window.draw(food);
     }
+
+    void Env::clear_window(sf::RenderWindow& window)
+    {
+        window.clear(sf::Color::Black);
+    }
     
     int Env::get_blocksize(){
         return blocksize;
