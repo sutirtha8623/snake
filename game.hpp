@@ -5,8 +5,6 @@
 #include"snake.hpp"
 #include"env_food.hpp"
 #include"over.hpp"
-#include<SFML/Config.hpp>
-#include<SFML/Window.hpp>
 
 class Game{
 public:
@@ -19,6 +17,7 @@ public:
     
     void handle_player_input();
     
+    
 private:
     sf::RenderWindow window;
     sf::Clock clock;
@@ -27,5 +26,10 @@ private:
     snake::Env env;
     snake::Snake player;
     snake::Over over;
+    
+    //sf::SoundBuffer over_buffer;
+    sf::SoundBuffer restart_buffer;
+    //sf::Sound over_sound;
+    sf::Sound restart_sound;
 };
 #endif

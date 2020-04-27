@@ -1,6 +1,5 @@
 #include<SFML/Graphics.hpp>
 #include"game.hpp"
-#include<iostream>
 
 
 Game::Game()
@@ -9,11 +8,15 @@ Game::Game()
 , player(env.get_blocksize())
 , over(0, sf::Vector2u(600, 400))
 {
+    restart_buffer.loadFromFile("res/audio/restart.ogg");
+    restart_sound.setBuffer(restart_buffer);
+    
     window.setVerticalSyncEnabled(true);
 }
 
 void Game::run()
 {
+    restart_sound.play();
     sf::Clock clock;
     sf::Time timestep = sf::seconds(1.0f/player.get_velocity());
     sf::Time time_elapsed = sf::Time::Zero;
@@ -39,17 +42,17 @@ void Game::handle_player_input()
         player.set_direction(snake::Direction::Up);
     }
     
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && player.get_direction()!=snake::Direction::Up){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && player.get_direction()!=snake::Direction::Up){
         
         player.set_direction(snake::Direction::Down);
     }
     
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && player.get_direction()!=snake::Direction::Right){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && player.get_direction()!=snake::Direction::Right){
         
         player.set_direction(snake::Direction::Left);
     }
     
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && player.get_direction()!=snake::Direction::Left){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && player.get_direction()!=snake::Direction::Left){
         
         player.set_direction(snake::Direction::Right);
     }
@@ -92,7 +95,6 @@ void Game::render()
     {
         window.clear(sf::Color::Black);
         over.set_score(player.get_score());
-        std::cout<<player.get_score()<<"\n";
         over.render(window);
     }
     window.display();

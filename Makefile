@@ -6,7 +6,7 @@ CXX = g++
 
 COMPILER-FLAGS = -c
 
-LINKER-FLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+LINKER-FLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 TARGET = snake
 

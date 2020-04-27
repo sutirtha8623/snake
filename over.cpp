@@ -7,7 +7,7 @@ namespace snake
     , over_text()
     , window_size(wind_size)
     {
-        font.loadFromFile("res/game_over.ttf");
+        font.loadFromFile("res/fonts/game_over.ttf");
 
         over_text.setFont(font);
 
@@ -16,6 +16,10 @@ namespace snake
         over_text.setPosition(sf::Vector2f(wind_size.x/2.0f, wind_size.y/2.0f));
 
         over_text.setCharacterSize(50);
+        
+        over_buffer.loadFromFile("res/audio/game_over.wav");
+        over_sound.setBuffer(over_buffer);
+        
     }
 
     Over::~Over()
@@ -27,7 +31,7 @@ namespace snake
     {
         score = sc;
     }
-
+    
     void Over::render(sf::RenderWindow& window)
     {
         over_text.setString(

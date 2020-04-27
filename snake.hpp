@@ -50,7 +50,6 @@ namespace snake{
     
         void update();
         void render(sf::RenderWindow& window);
-        void clear_window(sf::RenderWindow& window);
     
     
     };

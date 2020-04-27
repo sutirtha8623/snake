@@ -149,13 +149,4 @@ namespace snake{
         }
     }
 
-    void Snake::clear_window(sf::RenderWindow& window)
-    {
-        window.clear(sf::Color::Black);
-    }
-
-    
-    
-
-
 }

@@ -7,6 +7,7 @@
 #include<SFML/Config.hpp>
 #include<SFML/Window.hpp>
 #include<SFML/Graphics.hpp>
+#include<SFML/Audio.hpp>
 
 namespace snake{
     
@@ -17,6 +18,11 @@ namespace snake{
         
         sf::CircleShape food;
         sf::RectangleShape walls[4];
+        
+        sf::SoundBuffer food_buffer;
+        sf::Sound food_sound;
+        sf::SoundBuffer over_buffer;
+        sf::Sound over_sound;
     public:
         Env(sf::Vector2u wind_size);
         ~Env();
@@ -26,7 +32,6 @@ namespace snake{
         
         void update(Snake& snake);
         void render(sf::RenderWindow& window);
-        void clear_window(sf::RenderWindow& window);
         
     };
     

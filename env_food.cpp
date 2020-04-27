@@ -19,6 +19,9 @@ namespace snake{
         food.setFillColor(sf::Color::Red);
         food.setRadius(blocksize/2);
         
+        food_buffer.loadFromFile("res/audio/eat.wav");
+        food_sound.setBuffer(food_buffer);
+        
         for(int i=0; i<4; i++){
             walls[i].setFillColor(sf::Color(255,69,0));
             if((i%2)==0){
@@ -56,6 +59,7 @@ namespace snake{
     void Env::update(Snake& snake)
     {
         if(snake.get_position() == food_position){
+            food_sound.play();
             snake.extend();
             snake.increase_score();
             regenerate_food();
@@ -79,11 +83,6 @@ namespace snake{
             window.draw(walls[i]);
         }
         window.draw(food);
-    }
-
-    void Env::clear_window(sf::RenderWindow& window)
-    {
-        window.clear(sf::Color::Black);
     }
     
     int Env::get_blocksize(){
