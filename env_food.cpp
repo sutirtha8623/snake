@@ -61,6 +61,10 @@ namespace snake{
         if(snake.get_position() == food_position){
             food_sound.play();
             snake.extend();
+            if(snake.get_velocity() < 50)
+            {
+                snake.set_velocity(snake.get_velocity()+1);
+            }
             snake.increase_score();
             regenerate_food();
         }

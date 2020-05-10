@@ -8,6 +8,8 @@ Game::Game()
 , player(env.get_blocksize())
 , over(0, sf::Vector2u(600, 400))
 {
+    clock.restart();
+    
     restart_buffer.loadFromFile("res/audio/restart.ogg");
     restart_sound.setBuffer(restart_buffer);
     
@@ -16,23 +18,12 @@ Game::Game()
 
 void Game::run()
 {
-    restart_sound.play();
-    sf::Clock clock;
-    sf::Time timestep = sf::seconds(1.0f/player.get_velocity());
-    sf::Time time_elapsed = sf::Time::Zero;
     while(window.isOpen())
     {
-        process_events();
-        time_elapsed += clock.restart();
-        while(time_elapsed > timestep){
-            time_elapsed -= timestep;
-            process_events();
-            update();
-        }
+        handle_player_input();
+        update();
         render();
     }
-
-
 }
 
 void Game::handle_player_input()
@@ -42,6 +33,11 @@ void Game::handle_player_input()
         player.set_direction(snake::Direction::Up);
     }
     
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && player.get_direction()!=snake::Direction::Left){
+        
+        player.set_direction(snake::Direction::Right);
+    }    
+    
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && player.get_direction()!=snake::Direction::Up){
         
         player.set_direction(snake::Direction::Down);
@@ -50,11 +46,6 @@ void Game::handle_player_input()
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && player.get_direction()!=snake::Direction::Right){
         
         player.set_direction(snake::Direction::Left);
-    }
-    
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && player.get_direction()!=snake::Direction::Left){
-        
-        player.set_direction(snake::Direction::Right);
     }
     
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && player.lost_state == true)
@@ -82,8 +73,14 @@ void Game::process_events()
 
 void Game::update()
 {
-    player.update();
-    env.update(player);
+    process_events();
+    float timestep = 500 - 10*player.get_velocity();
+    if(clock.getElapsedTime().asMilliseconds() >= timestep)
+    {
+        player.update();
+        env.update(player);
+        clock.restart();
+    }
 }
 
 void Game::render()

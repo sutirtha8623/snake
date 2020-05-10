@@ -21,7 +21,6 @@ public:
 private:
     sf::RenderWindow window;
     sf::Clock clock;
-    float time_elapsed;
     
     snake::Env env;
     snake::Snake player;

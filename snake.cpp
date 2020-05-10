@@ -57,7 +57,7 @@ namespace snake{
         snake_body.push_back(snake_piece(7, 7));
         
         score = 0;
-        velocity = 15;
+        velocity = 35;
         set_direction(Direction::Start);
         lost_state = false;
         
